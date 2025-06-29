@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Start Minecraft Server</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; margin-top: 100px; }
-    button { padding: 15px 30px; font-size: 18px; }
-  </style>
+  <title>Minecraft Server Launcher</title>
 </head>
-<body>
-  <h1>Start Your Minecraft Server</h1>
-  <button onclick="startServer()">Start Server</button>
-  <p id="status"></p>
+<body style="font-family: sans-serif; text-align: center; margin-top: 100px;">
+  <h1>Minecraft Server Control</h1>
+  <button id="startBtn" style="padding: 10px 20px; font-size: 16px;">Start Server</button>
+  <p id="status" style="margin-top: 20px;"></p>
 
   <script>
-    async function startServer() {
-      document.getElementById('status').innerText = 'Starting server...';
+    document.getElementById('startBtn').onclick = async () => {
+      const status = document.getElementById('status');
+      status.textContent = "Starting server...";
+
       try {
-        const res = await fetch('https://us-central1-nifty-saga-460819-k1.cloudfunctions.net/start-minecraft-server');
-        const text = await res.text();
-        document.getElementById('status').innerText = text;
+        const response = await fetch('https://us-central1-nifty-saga-460819-k1.cloudfunctions.net/start-minecraft-server');
+        const text = await response.text();
+        status.textContent = text;
       } catch (err) {
-        document.getElementById('status').innerText = 'Failed to start server.';
+        status.textContent = "Error: " + err.message;
       }
-    }
+    };
   </script>
 </body>
 </html>
