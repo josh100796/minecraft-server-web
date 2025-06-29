@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Start Minecraft Server</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 100px; }
+    button { padding: 15px 30px; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <h1>Start Your Minecraft Server</h1>
+  <button onclick="startServer()">Start Server</button>
+  <p id="status"></p>
+
+  <script>
+    async function startServer() {
+      document.getElementById('status').innerText = 'Starting server...';
+      try {
+        const res = await fetch('https://us-central1-nifty-saga-460819-k1.cloudfunctions.net/start-minecraft-server');
+        const text = await res.text();
+        document.getElementById('status').innerText = text;
+      } catch (err) {
+        document.getElementById('status').innerText = 'Failed to start server.';
+      }
+    }
+  </script>
+</body>
+</html>
