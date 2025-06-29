@@ -38,20 +38,23 @@
   <button onclick="startServer()">Start Server</button>
   <div id="status"></div>
 
-  <script>
-    async function startServer() {
-      const status = document.getElementById('status');
-      status.innerText = 'Starting server...';
+<script>
+  async function startServer() {
+    const status = document.getElementById('status');
+    status.innerText = 'Starting server...';
 
-      try {
-        const response = await fetch("https://us-central1-nifty-saga-460819-k1.cloudfunctions.net/startInstance");
-        const text = await response.text();
-        status.innerText = "Server started successfully!";
-      } catch (error) {
-        console.error('Error starting server:', error);
-        status.innerText = "Failed to start the server.";
-      }
+    try {
+      const response = await fetch("https://us-central1-nifty-saga-460819-k1.cloudfunctions.net/startInstance", {
+        method: "POST"
+      });
+      const text = await response.text();
+      status.innerText = "Server started successfully!";
+    } catch (error) {
+      console.error('Error starting server:', error);
+      status.innerText = "Failed to start the server.";
     }
-  </script>
+  }
+</script>
+
 </body>
 </html>
